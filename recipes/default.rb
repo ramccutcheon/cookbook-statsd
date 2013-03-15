@@ -20,32 +20,39 @@
 include_recipe "build-essential"
 include_recipe "git"
 
-package "debhelper"
-package "nodejs"
+case node.platform
+  when "ubuntu", "debian"
 
-statsd_version = node['statsd']['sha']
+    package "nodejs"
+    package "debhelper"
 
-git ::File.join(node['statsd']['tmp_dir'], "statsd") do
-  repository node['statsd']['repo']
-  reference statsd_version
-  action :sync
-  notifies :run, "execute[build debian package]"
-end
+    statsd_version = node['statsd']['sha']
 
-# Fix the debian changelog file of the repo
-template ::File.join(node['statsd']['tmp_dir'], "statsd/debian/changelog") do
-  source "changelog.erb"
-end
+    git ::File.join(node['statsd']['tmp_dir'], "statsd") do
+      repository node['statsd']['repo']
+      reference statsd_version
+      action :sync
+      notifies :run, "execute[build debian package]"
+    end
 
-execute "build debian package" do
-  command "dpkg-buildpackage -us -uc"
-  cwd ::File.join(node['statsd']['tmp_dir'], "statsd")
-  creates ::File.join(node['statsd']['tmp_dir'], "statsd_#{node['statsd']['package_version']}_all.deb")
-end
+    # Fix the debian changelog file of the repo
+    template ::File.join(node['statsd']['tmp_dir'], "statsd/debian/changelog") do
+      source "changelog.erb"
+    end
 
-dpkg_package "statsd" do
-  action :install
-  source ::File.join(node['statsd']['tmp_dir'], "statsd_#{node['statsd']['package_version']}_all.deb")
+    execute "build debian package" do
+      command "dpkg-buildpackage -us -uc"
+      cwd ::File.join(node['statsd']['tmp_dir'], "statsd")
+      creates ::File.join(node['statsd']['tmp_dir'], "statsd_#{node['statsd']['package_version']}_all.deb")
+    end
+
+    dpkg_package "statsd" do
+      action :install
+      source ::File.join(node['statsd']['tmp_dir'], "statsd_#{node['statsd']['package_version']}_all.deb")
+    end
+
+  when "redhat", "centos"
+    raise "No support for RedHat or CentOS (yet)."
 end
 
 template "/etc/statsd/localConfig.js" do
