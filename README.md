@@ -25,3 +25,11 @@ Usage
 Including this recipe will build a dpkg from the statsd git repository and install it.
 
 By default statsd will attempt to send statistics to a graphite instance running on localhost.
+
+Testing
+=======
+
+    $ bundle install
+    $ bundle exec berks install
+    $ bundle exec strainer test
+
