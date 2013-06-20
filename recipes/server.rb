@@ -20,7 +20,7 @@
 include_recipe "build-essential"
 include_recipe "git"
 
-case node.platform
+case node["platform"]
   when "ubuntu", "debian"
 
     package "nodejs"
