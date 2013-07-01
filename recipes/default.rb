@@ -17,5 +17,4 @@
 # limitations under the License.
 #
 
-package "rubygems"
 gem_package "statsd-ruby"
