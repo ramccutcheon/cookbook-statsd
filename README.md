@@ -29,16 +29,14 @@ By default statsd will attempt to send statistics to a graphite instance running
 Testing
 =======
 
-    $ bundle install
-    $ bundle exec berks install
-    $ bundle exec strainer test
+See SilverLining documentation
 
 License and Author
 ==================
 
 Author:: Scott Lampert (<sl724q@att.com>)
 
-Copyright 2012-2013, AT&T Services, Inc.
+Copyright 2012-2014, AT&T Services, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -7,22 +7,25 @@
       "locked_version": "1.4.2"
     },
     "git": {
-      "locked_version": "2.6.0"
+      "locked_version": "2.9.0"
     },
     "dmg": {
-      "locked_version": "2.0.0"
-    },
-    "yum": {
-      "locked_version": "2.3.2"
+      "locked_version": "2.1.2"
     },
     "windows": {
-      "locked_version": "1.10.0"
+      "locked_version": "1.12.8"
     },
     "chef_handler": {
       "locked_version": "1.1.4"
     },
     "runit": {
-      "locked_version": "1.2.0"
+      "locked_version": "1.5.8"
+    },
+    "yum": {
+      "locked_version": "3.0.4"
+    },
+    "yum-epel": {
+      "locked_version": "0.2.0"
     }
   }
 }
